@@ -5403,8 +5403,8 @@ package.json
   }
 "scripts":{
     "build-client": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build-client",
+   .
+
 }
 ```
 
