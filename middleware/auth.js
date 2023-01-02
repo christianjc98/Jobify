@@ -2,18 +2,17 @@ import { UnAuthenticatedError } from "../errors/index.js";
 import jwt from "jsonwebtoken";
 
 const auth = async (req, res, next) => {
-  const authHeaders = req.headers.authorization;
+  const token = req.cookies.token;
 
-  if (!authHeaders || !authHeaders.startsWith("Bearer")) {
+  if (!token) {
     throw new UnAuthenticatedError("Authentication invalid");
   }
 
-  const token = authHeaders.split(" ")[1];
-
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(payload);
-    req.user = { userId: payload.userId };
+    const testUser = payload.userId === "63b33db80d23ad80aeee866a";
+    req.user = { userId: payload.userId, testUser };
+
     next();
   } catch (error) {
     throw new UnAuthenticatedError("Authentication invalid");

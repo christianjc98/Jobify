@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import Wrapper from "../assets/wrappers/JobsContainer";
 import Job from "./Job";
 import PageBtnContainer from "./PageBtnContainer";
+import Alert from "./Alert";
 
 const JobsContainer = () => {
   const {
@@ -17,6 +18,7 @@ const JobsContainer = () => {
     searchStatus,
     sort,
     numOfPages,
+    showAlert,
   } = useAppContext();
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const JobsContainer = () => {
 
   return (
     <Wrapper>
+      {showAlert && <Alert />}
       <h5>
         {totalJobs} job{jobs.length > 1 && "s"} found
       </h5>
